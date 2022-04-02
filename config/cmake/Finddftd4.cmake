@@ -16,7 +16,8 @@
 
 set(_lib "dftd4")
 set(_pkg "DFTD4")
-set(_url "https://github.com/dftd4/dftd4")
+set(_url "https://github.com/dmejiar/dftd4")
+set(_revision "ilp64")
 
 if(NOT DEFINED "${_pkg}_FIND_METHOD")
   if(DEFINED "${PROJECT_NAME}-dependency-method")
