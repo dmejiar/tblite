@@ -1,4 +1,4 @@
 [wrap-git]
 directory = s-dftd3
-url = https://github.com/awvwgk/simple-dftd3
-revision = head
+url = https://github.com/dmejiar/simple-dftd3
+revision = ilp64
