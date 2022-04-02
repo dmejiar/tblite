@@ -51,3 +51,10 @@ option(
   value: '3',
   description: 'Python version to link against.',
 )
+
+option(
+  'ilp64',
+  type: 'boolean',
+  value: false,
+  description: 'Link to ILP64 LAPACK/BLAS libraries',
+)

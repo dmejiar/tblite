@@ -18,7 +18,13 @@ if get_option('api') or get_option('python')
   subdir('api')
 endif
 subdir('basis')
-subdir('blas')
+
+if get_option('ilp64')
+  subdir('blas64')
+else
+  subdir('blas')
+endif
+
 subdir('classical')
 subdir('container')
 subdir('context')
@@ -29,7 +35,13 @@ subdir('external')
 subdir('fit')
 subdir('integral')
 subdir('io')
-subdir('lapack')
+
+if get_option('ilp64')
+  subdir('lapack64')
+else
+  subdir('lapack')
+endif
+
 subdir('ncoord')
 subdir('output')
 subdir('param')

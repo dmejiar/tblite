@@ -15,7 +15,7 @@
 ! along with tblite.  If not, see <https://www.gnu.org/licenses/>.
 
 module tblite_scf_broyden
-   use mctc_env, only : wp
+   use mctc_env, only : wp, i8
    use tblite_lapack, only : getrf, getrs
    implicit none
    private
@@ -251,8 +251,13 @@ subroutine lineq(a, c)
    real(wp), intent(inout) :: a(:, :)
    real(wp), intent(inout) :: c(:, :)
 
-   integer info
+#ifdef WITH_ILP64
+   integer(i8), allocatable :: ipiv(:)
+   integer(i8) info
+#else
    integer, allocatable :: ipiv(:)
+   integer info
+#endif   
 
    allocate(ipiv(size(a, 1)))
    ! LU decomoposition of a general matrix

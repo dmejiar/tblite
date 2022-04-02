@@ -14,10 +14,13 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with tblite.  If not, see <https://www.gnu.org/licenses/>.
 
-srcs += files(
-  'broyden.F90',
-  'info.f90',
-  'iterator.f90',
-  'potential.f90',
-  'solver.f90',
+set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
+
+list(
+  APPEND srcs
+  "${dir}/level1.f90"
+  "${dir}/level2.f90"
+  "${dir}/level3.f90"
 )
+
+set(srcs "${srcs}" PARENT_SCOPE)
