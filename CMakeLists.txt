@@ -16,6 +16,9 @@
 
 cmake_minimum_required(VERSION 3.14)
 
+option(ENABLE_ILP64 "Enable ILP64 support" OFF)
+set(ENABLE_AUTO_LAPACK ON)
+
 project(
   "tblite"
   LANGUAGES "Fortran" "C"
@@ -38,8 +41,19 @@ if(NOT TARGET "OpenMP::OpenMP_Fortran")
   endif()
 endif()
 
-if(NOT TARGET "LAPACK::LAPACK")
-  find_package("LAPACK" REQUIRED)
+if(LAPACK_LIBRARIES)
+  set(ENABLE_AUTO_LAPACK OFF)
+  message(STATUS "LAPACK supplied by user is ${LAPACK_LIBRARIES}")
+endif()
+
+if(ENABLE_AUTO_LAPACK)
+  if(NOT TARGET "LAPACK::LAPACK")
+    find_package("LAPACK" REQUIRED)
+  endif()
+else()
+  if(ENABLE_ILP64)
+    add_definitions(-DWITH_ILP64)
+  endif()
 endif()
 
 # Collect subprojects
@@ -69,6 +83,12 @@ set(
   "dftd4::dftd4"
   "s-dftd3::s-dftd3"
 )
+
+if(ENABLE_AUTO_LAPACK)
+  set(lib-deps ${lib-deps} "LAPACK::LAPACK")
+else
+  set(lib-deps ${lib-deps} ${LAPACK_LIBRARIES})
+endif()
 
 # Collect source of the project
 set(srcs)
