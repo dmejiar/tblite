@@ -20,6 +20,7 @@ macro(
   package
   methods
   url
+  revision
 )
   string(TOLOWER "${package}" _pkg_lc)
   string(TOUPPER "${package}" _pkg_uc)

@@ -37,9 +37,9 @@ add_subdirectory("integral")
 add_subdirectory("io")
 
 if(WITH_ILP64)
-  add_subdirectory("lapack")
-else()
   add_subdirectory("lapack64")
+else()
+  add_subdirectory("lapack")
 endif()
 
 add_subdirectory("ncoord")
