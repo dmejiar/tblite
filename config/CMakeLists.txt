@@ -36,7 +36,7 @@ endif()
 
 set(
   module-dir
-  "${PROJECT_NAME}/${CMAKE_Fortran_COMPILER_ID}-${CMAKE_Fortran_COMPILER_VERSION}"
+  "${PROJECT_NAME}"
 )
 set(module-dir "${module-dir}" PARENT_SCOPE)
 
