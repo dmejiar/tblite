@@ -88,7 +88,7 @@ macro(
       FetchContent_Declare(
         "${_pkg_lc}"
         GIT_REPOSITORY "${url}"
-        GIT_TAG "HEAD"
+        GIT_TAG "${revision}"
       )
       FetchContent_MakeAvailable("${_pkg_lc}")
 

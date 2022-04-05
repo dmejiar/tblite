@@ -16,9 +16,6 @@
 
 cmake_minimum_required(VERSION 3.14)
 
-option(ENABLE_ILP64 "Enable ILP64 support" OFF)
-set(ENABLE_AUTO_LAPACK ON)
-
 project(
   "tblite"
   LANGUAGES "Fortran" "C"
@@ -42,17 +39,19 @@ if(NOT TARGET "OpenMP::OpenMP_Fortran")
 endif()
 
 if(LAPACK_LIBRARIES)
-  set(ENABLE_AUTO_LAPACK OFF)
   message(STATUS "LAPACK supplied by user is ${LAPACK_LIBRARIES}")
+endif()
+
+if(WITH_ILP64)
+  add_definitions(-DWITH_ILP64)
+  if(ENABLE_AUTO_LAPACK)
+    set(BLA_SIZEOF_INTEGER 8)
+  endif()
 endif()
 
 if(ENABLE_AUTO_LAPACK)
   if(NOT TARGET "LAPACK::LAPACK")
     find_package("LAPACK" REQUIRED)
-  endif()
-else()
-  if(ENABLE_ILP64)
-    add_definitions(-DWITH_ILP64)
   endif()
 endif()
 
@@ -76,8 +75,6 @@ endif()
 set(
   lib-deps
   "OpenMP::OpenMP_Fortran"
-  "LAPACK::LAPACK"
-  "$<$<VERSION_LESS:${CMAKE_VERSION},3.20>:BLAS::BLAS>"
   "toml-f::toml-f"
   "mctc-lib::mctc-lib"
   "dftd4::dftd4"
@@ -85,7 +82,10 @@ set(
 )
 
 if(ENABLE_AUTO_LAPACK)
-  set(lib-deps ${lib-deps} "LAPACK::LAPACK")
+  set(lib-deps ${lib-deps} 
+    "LAPACK::LAPACK"
+    "$<$<VERSION_LESS:${CMAKE_VERSION},3.20>:BLAS::BLAS>"
+    )
 else()
   set(lib-deps ${lib-deps} ${LAPACK_LIBRARIES})
 endif()

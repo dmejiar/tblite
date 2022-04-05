@@ -19,6 +19,14 @@ option(BUILD_SHARED_LIBS "Whether the libraries built should be shared" FALSE)
 option(WITH_API "Enable export of C-API" TRUE)
 option(WITH_OpenMP "Enable support for shared memory parallelisation with OpenMP" TRUE)
 option(WITH_TESTS "Enable compilation of unit tests" TRUE)
+option(WITH_ILP64 "Enable ILP64 support" OFF)
+option(ENABLE_AUTO_LAPACK "Automatic CMake LAPACK/BLAS detection" ON)
+set(LAPACK_LIBRARIES "" CACHE STRING "External LAPACK/BLAS libraries")
+
+if(LAPACK_LIBRARIES)
+  set(ENABLE_AUTO_LAPACK OFF PARENT_SCOPE)
+endif()
+
 if(NOT DEFINED "${PROJECT_NAME}-dependency-method")
   set(
     "${PROJECT_NAME}-dependency-method"
