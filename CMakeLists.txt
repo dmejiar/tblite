@@ -86,7 +86,7 @@ set(
 
 if(ENABLE_AUTO_LAPACK)
   set(lib-deps ${lib-deps} "LAPACK::LAPACK")
-else
+else()
   set(lib-deps ${lib-deps} ${LAPACK_LIBRARIES})
 endif()
 
