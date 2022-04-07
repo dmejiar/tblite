@@ -40,7 +40,7 @@ module tblite_ncoord_gfn
    !> Offset of the second counting function
    real(wp),parameter :: r_shift = 2.0_wp
 
-   real(wp), parameter :: default_cutoff = 25.0_wp
+   real(wp), parameter :: default_cutoff = 40.0_wp
 
 
 contains

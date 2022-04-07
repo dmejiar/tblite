@@ -71,7 +71,7 @@ subroutine new_d4_dispersion(self, mol, s6, s8, a1, a2, s9)
 
    call new_d4_model(self%model, mol, ref=d4_ref%gfn2)
    self%param = rational_damping_param(s6=s6, s8=s8, s9=s9, a1=a1, a2=a2)
-   self%cutoff = realspace_cutoff(disp3=25.0_wp, disp2=50.0_wp)
+   self%cutoff = realspace_cutoff(disp3=40.0_wp, disp2=60.0_wp)
 end subroutine new_d4_dispersion
 
 
