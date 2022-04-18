@@ -22,6 +22,7 @@ module tblite_data_covrad
    private
 
    public :: get_covalent_rad
+   public :: get_covalent_rad_num
 
 
    !> Covalent radii for DFT-D3 coordination number

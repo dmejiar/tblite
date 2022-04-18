@@ -22,6 +22,7 @@ module tblite_cutoff
    private
 
    public :: get_lattice_points, wrap_to_central_cell
+   public :: get_lattice_points_cutoff
 
 
    interface get_lattice_points

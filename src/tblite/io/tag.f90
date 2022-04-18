@@ -150,7 +150,7 @@ subroutine read_tagged(unit, val, stat)
          n = max(product(val%shape), 1)
          allocate(tmp(n))
          read(unit, *) (tmp(i), i = 1, n)
-         call move_alloc(tmp, val%raw)
+         allocate(val%raw, source=tmp)
       end block
    end select
 end subroutine read_tagged

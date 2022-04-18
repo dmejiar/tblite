@@ -19,7 +19,7 @@ module tblite_output_property
    implicit none
    private
 
-   public :: property, write(formatted)
+   public :: property, writef
 
    type :: property
       character(len=:), allocatable :: label
@@ -31,7 +31,7 @@ module tblite_output_property
       module procedure :: new_property
    end interface property
 
-    interface write(formatted)
+    interface writef
         module procedure :: write_formatted
     end interface
 

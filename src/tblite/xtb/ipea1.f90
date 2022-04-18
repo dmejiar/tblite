@@ -45,7 +45,7 @@ module tblite_xtb_ipea1
    real(wp), parameter :: s6 = 1.0_wp, s8 = 2.4_wp, a1 = 0.63_wp, a2 = 5.0_wp, s9 = 0.0_wp
    real(wp), parameter :: rep_kexp = 1.5_wp, rep_rexp = 1.0_wp
    real(wp), parameter :: gexp = 1.0_wp
-   real(wp), parameter :: kdiag(0:4) = [2.15_wp, 2.30_wp, spread(2.0_wp, 1, 3)]
+   real(wp), parameter :: kdiag(0:4) = [2.15_wp, 2.30_wp, 2.0_wp, 2.0_wp, 2.0_wp]
    real(wp), parameter :: enscale = -7.0e-3_wp
    real(wp), parameter :: kdiff = 2.25_wp
 

@@ -53,7 +53,7 @@ module tblite_xtb_gfn2
 
    real(wp), parameter :: wexp = 0.5_wp
    real(wp), parameter :: enscale = 2.0e-2_wp
-   real(wp), parameter :: kdiag(0:4) = [1.85_wp, 2.23_wp, spread(2.23_wp, 1, 3)]
+   real(wp), parameter :: kdiag(0:4) = [1.85_wp, 2.23_wp, 2.23_wp, 2.23_wp, 2.23_wp]
 
    !> Exponents of repulsion term for GFN2-xTB repulsion
    real(wp), parameter :: rep_alpha(max_elem) = [&
@@ -165,7 +165,7 @@ module tblite_xtb_gfn2
       & 0.0_wp,-0.2532073_wp, 0.2500000_wp, 0.0_wp,-0.0302388_wp,-0.2300000_wp],&
       & shape(shell_hubbard))
 
-   real(wp), parameter :: shell_hubbard_derivs(0:4) = [1.0_wp, 0.5_wp, spread(0.25_wp, 1, 3)]
+   real(wp), parameter :: shell_hubbard_derivs(0:4) = [1.0_wp, 0.5_wp, 0.25_wp, 0.25_wp, 0.25_wp]
 
    real(wp), parameter :: p_hubbard_derivs(max_elem) = 0.1_wp * [&
       & 0.800000_wp, 2.000000_wp, 1.303821_wp, 0.574239_wp, 0.946104_wp, &
@@ -465,7 +465,7 @@ module tblite_xtb_gfn2
    real(wp), parameter :: mp_dmp3 = 3.0_wp, mp_dmp5 = 4.0_wp
    real(wp), parameter :: mp_shift = 1.2_wp, mp_kexp = 4.0_wp, mp_rmax = 5.0_wp
    !> Dipole exchange-correlation kernel
-   real(wp), parameter :: p_dkernel(*) = 0.01_wp * [&
+   real(wp), parameter :: p_dkernel(86) =  [&
       & 5.563889_wp,-1.000000_wp,-0.500000_wp,-0.613341_wp,-0.481186_wp, &
       &-0.411674_wp, 3.521273_wp,-4.935670_wp,-8.339183_wp,10.000000_wp, &
       & 0.000000_wp,-0.082005_wp, 2.633341_wp,-0.025750_wp, 2.110225_wp, &
@@ -483,9 +483,9 @@ module tblite_xtb_gfn2
       &-0.476974_wp,-0.537685_wp,-0.200343_wp, 0.065886_wp,-0.587636_wp, &
       &-0.510090_wp,-0.673822_wp,-0.423684_wp, 0.393418_wp,-0.250000_wp, &
       & 0.374018_wp, 1.007016_wp,-0.737252_wp,-1.344854_wp,-0.348123_wp, &
-      &-0.167597_wp]
+      &-0.167597_wp] * 0.01_wp
    !> Quadrupole exchange-correlation kernel
-   real(wp), parameter :: p_qkernel(*) = 0.01_wp * [&
+   real(wp), parameter :: p_qkernel(86) = [&
       & 0.027431_wp,-0.337528_wp, 0.020000_wp,-0.058586_wp,-0.058228_wp, &
       & 0.213583_wp, 2.026786_wp,-0.310828_wp,-0.245955_wp,-0.500000_wp, &
       & 0.020000_wp,-0.005516_wp,-0.021887_wp,-0.080000_wp, 0.028679_wp, &
@@ -503,7 +503,7 @@ module tblite_xtb_gfn2
       &-0.020000_wp,-0.016478_wp, 0.039599_wp, 1.063309_wp, 0.306870_wp, &
       & 0.759049_wp, 0.322935_wp, 0.098019_wp,-0.020320_wp,-0.032901_wp, &
       &-0.008506_wp,-0.001670_wp, 0.162529_wp, 0.013818_wp, 0.021624_wp, &
-      &-0.111556_wp]
+      &-0.111556_wp] * 0.01_wp
    !> Valence coordination number for radii
    real(wp), parameter :: p_vcn(*) = [&
       & 1.0_wp, 1.0_wp, 1.0_wp, 2.0_wp, 3.0_wp, 3.0_wp, 3.0_wp, 2.0_wp, 1.0_wp, &

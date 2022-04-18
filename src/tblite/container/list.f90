@@ -331,8 +331,9 @@ subroutine taint(cache, ptr)
    if (.not.allocated(cache%raw)) then
       block
          type(cache_list), allocatable :: tmp
-         allocate(tmp)
-         call move_alloc(tmp, cache%raw)
+!         allocate(tmp)
+!         call move_alloc(tmp, cache%raw)
+         allocate(cache_list :: cache%raw)
       end block
    end if
 

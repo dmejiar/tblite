@@ -29,7 +29,7 @@ module tblite_xtb_singlepoint
    use tblite_integral_type, only : integral_type, new_integral
    use tblite_output_ascii, only : ascii_levels, ascii_dipole_moments, &
       & ascii_quadrupole_moments
-   use tblite_output_property, only : property, write(formatted)
+   use tblite_output_property, only : property, writef
    use tblite_output_format, only : format_string
    use tblite_scf, only : broyden_mixer, new_broyden, scf_info, next_scf, &
       & get_mixer_dimension, potential_type, new_potential
@@ -78,6 +78,7 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
    type(broyden_mixer) :: mixer
    type(timer_type) :: timer
    type(error_type), allocatable :: error
+   type(property) :: temp
 
    type(scf_info) :: info
    type(sygvd_solver) :: sygvd
@@ -95,7 +96,7 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
    econv = 1.e-6_wp*accuracy
    pconv = 2.e-5_wp*accuracy
 
-   sygvd = sygvd_solver()
+   !sygvd = sygvd_solver()
 
    grad = present(gradient) .and. present(sigma)
 
@@ -114,7 +115,10 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
       cutoff = 20.0_wp
       call get_lattice_points(mol%periodic, mol%lattice, cutoff, lattr)
       call calc%halogen%get_engrad(mol, lattr, cutoff, exbond, gradient, sigma)
-      if (prlevel > 1) print *, property("halogen-bonding energy", exbond, "Eh")
+      if (prlevel > 1) then
+        temp =  property("halogen-bonding energy", exbond, "Eh")
+        print *, temp
+      endif
       energy = energy + exbond
       call timer%pop
    end if
@@ -124,7 +128,10 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
       cutoff = 25.0_wp
       call get_lattice_points(mol%periodic, mol%lattice, cutoff, lattr)
       call calc%repulsion%get_engrad(mol, lattr, cutoff, erep, gradient, sigma)
-      if (prlevel > 1) print *, property("repulsion energy", erep, "Eh")
+      if (prlevel > 1) then
+        temp = property("repulsion energy", erep, "Eh")
+        print *, temp
+      endif
       energy = energy + erep
       call timer%pop
    end if
@@ -133,7 +140,10 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
       call timer%push("dispersion")
       call calc%dispersion%update(mol, dcache)
       call calc%dispersion%get_engrad(mol, dcache, edisp, gradient, sigma)
-      if (prlevel > 1) print *, property("dispersion energy", edisp, "Eh")
+      if (prlevel > 1) then
+        temp = property("dispersion energy", edisp, "Eh")
+        print *, temp
+      endif
       energy = energy + edisp
       call timer%pop
    end if
@@ -142,7 +152,10 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
       call timer%push("interactions")
       call calc%interactions%update(mol, icache)
       call calc%interactions%get_engrad(mol, icache, eint, gradient, sigma)
-      if (prlevel > 1) print *, property("interaction energy", eint, "Eh")
+      if (prlevel > 1) then
+        temp = property("interaction energy", eint, "Eh")
+        print *, temp
+      endif
       energy = energy + eint
       call timer%pop
    end if
@@ -163,7 +176,8 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
    end if
    call get_alpha_beta_occupation(wfn%nocc, wfn%nuhf, wfn%nel(1), wfn%nel(2))
 
-   if (prlevel > 1) print *, property("number of electrons", wfn%nocc, "e")
+   temp = property("number of electrons", wfn%nocc, "e")
+   if (prlevel > 1) print *, temp
 
    call timer%push("hamiltonian")
    if (allocated(calc%ncoord)) then
@@ -183,7 +197,8 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
    call new_adjacency_list(list, mol, lattr, cutoff)
 
    if (prlevel > 1) then
-      print *, property("integral cutoff", cutoff, "bohr")
+      temp = property("integral cutoff", cutoff, "bohr")
+      print *, temp
       print *
    end if
 
@@ -228,8 +243,10 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
    call timer%pop
 
    if (prlevel > 1) then
-      print *, property("electronic energy", eelec, "Eh")
-      print *, property("total energy", energy, "Eh")
+      temp = property("electronic energy", eelec, "Eh")
+      print *, temp
+      temp = property("total energy", energy, "Eh")
+      print *, temp
       print *
    end if
 

@@ -27,7 +27,7 @@ module tblite_disp_d4
    use tblite_disp_type, only : dispersion_type
    use tblite_scf_potential, only : potential_type
    use tblite_wavefunction_type, only : wavefunction_type
-   use tblite_cutoff, only : get_lattice_points
+   use tblite_cutoff, only : get_lattice_points => get_lattice_points_cutoff
    implicit none
    private
 
