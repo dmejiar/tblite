@@ -26,14 +26,17 @@ module tblite_output_property
       real(wp) :: value
       character(len=:), allocatable :: unit
       contains
-        procedure, private :: write_formatted
-        generic :: write(formatted) => write_formatted
+        procedure, private, pass :: write => write_formatted
+        generic,public :: write(formatted) => write
    end type property
 
    interface property
       module procedure :: new_property
    end interface property
 
+   interface WRITE(FORMATTED)
+     module procedure :: write_formatted
+   end interface WRITE(FORMATTED)
 
 contains
 

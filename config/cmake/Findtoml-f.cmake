@@ -16,7 +16,7 @@
 
 set(_lib "toml-f")
 set(_pkg "TOMLF")
-set(_url "https://github.com/toml-f/toml-f")
+set(_url "https://github.com/dmejiar/toml-f")
 set(_revision "HEAD")
 
 if(NOT DEFINED "${_pkg}_FIND_METHOD")
