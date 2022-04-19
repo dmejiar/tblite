@@ -27,7 +27,7 @@ module tblite_output_property
       character(len=:), allocatable :: unit
       contains
         procedure, private :: write_formatted
-        generic :: write(formatted) => write_formated
+        generic :: write(formatted) => write_formatted
    end type property
 
    interface property
