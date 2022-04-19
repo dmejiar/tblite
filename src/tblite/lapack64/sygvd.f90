@@ -141,7 +141,7 @@ subroutine handle_info(error, info)
 
    if (info /= 0) then
       call fatal_error(error, "(sygvd) failed to solve eigenvalue problem.&
-         & info="//format_string(int(info,kind=i4), '(i0)'))
+         & info="//format_string(int(info), '(i0)'))
    end if
 end subroutine handle_info
 
