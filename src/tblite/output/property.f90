@@ -34,10 +34,6 @@ module tblite_output_property
       module procedure :: new_property
    end interface property
 
-   interface WRITE(FORMATTED)
-     module procedure :: write_formatted
-   end interface WRITE(FORMATTED)
-
 contains
 
 
