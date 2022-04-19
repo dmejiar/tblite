@@ -19,21 +19,20 @@ module tblite_output_property
    implicit none
    private
 
-   public :: property, writef
+   public :: property
 
    type :: property
       character(len=:), allocatable :: label
       real(wp) :: value
       character(len=:), allocatable :: unit
+      contains
+        procedure, private :: write_formatted
+        generic :: write(formatted) => write_formated
    end type property
 
    interface property
       module procedure :: new_property
    end interface property
-
-    interface writef
-        module procedure :: write_formatted
-    end interface
 
 
 contains
