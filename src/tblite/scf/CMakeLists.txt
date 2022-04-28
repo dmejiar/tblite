@@ -20,7 +20,7 @@ list(
   APPEND srcs
   "${dir}/broyden.F90"
   "${dir}/info.f90"
-  "${dir}/iterator.f90"
+  "${dir}/iterator.F90"
   "${dir}/potential.f90"
   "${dir}/solver.f90"
 )

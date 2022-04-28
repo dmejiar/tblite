@@ -20,7 +20,7 @@ list(
   APPEND srcs
   "${dir}/ascii.f90"
   "${dir}/format.f90"
-  "${dir}/property.f90"
+  "${dir}/property.F90"
 )
 
 set(srcs "${srcs}" PARENT_SCOPE)

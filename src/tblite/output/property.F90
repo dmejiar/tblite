@@ -19,20 +19,31 @@ module tblite_output_property
    implicit none
    private
 
+#ifdef NVIDIA
    public :: property
+#else
+   public :: property, write(formatted)
+#endif
 
    type :: property
       character(len=:), allocatable :: label
       real(wp) :: value
       character(len=:), allocatable :: unit
+#ifdef NVIDIA
       contains
         procedure, private, pass :: write => write_formatted
         generic,public :: write(formatted) => write
+#endif
    end type property
 
    interface property
       module procedure :: new_property
    end interface property
+#ifndef NVIDIA
+   interface write(formatted)
+     module procedure :: write_formatted
+   end interface
+#endif
 
 contains
 

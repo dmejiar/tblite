@@ -17,7 +17,7 @@
 srcs += files(
   'broyden.F90',
   'info.f90',
-  'iterator.f90',
+  'iterator.F90',
   'potential.f90',
   'solver.f90',
 )

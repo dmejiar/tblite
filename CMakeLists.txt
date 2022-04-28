@@ -50,6 +50,10 @@ if(WITH_ILP64)
   endif()
 endif()
 
+if((CMAKE_Fortran_COMPILER_ID STREQUAL "NVHPC") OR (CMAKE_Fortran_COMPILER_ID STREQUAL "PGI"))
+  add_definitions(-DNVIDIA)
+endif()
+
 if(ENABLE_AUTO_LAPACK)
   if(NOT TARGET "LAPACK::LAPACK")
     find_package("LAPACK" REQUIRED)

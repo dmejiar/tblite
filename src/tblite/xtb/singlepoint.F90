@@ -29,7 +29,10 @@ module tblite_xtb_singlepoint
    use tblite_integral_type, only : integral_type, new_integral
    use tblite_output_ascii, only : ascii_levels, ascii_dipole_moments, &
       & ascii_quadrupole_moments
-   use tblite_output_property, only : property!, write(formatted)
+   use tblite_output_property, only : property
+#ifndef NVIDIA
+   use tblite_output_property, only : write(formatted)
+#endif
    use tblite_output_format, only : format_string
    use tblite_scf, only : broyden_mixer, new_broyden, scf_info, next_scf, &
       & get_mixer_dimension, potential_type, new_potential

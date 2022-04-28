@@ -32,6 +32,10 @@ module tblite_scf_iterator
    use tblite_scf_potential, only : potential_type, add_pot_to_h1
    use tblite_scf_solver, only : solver_type
    use tblite_output_property, only : property!, write(formatted)
+#ifndef NVIDIA
+   use tblite_output_property, only : write(formatted)
+#endif
+
    implicit none
    private
 
