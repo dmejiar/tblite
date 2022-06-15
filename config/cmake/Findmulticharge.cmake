@@ -16,7 +16,7 @@
 
 set(_lib "multicharge")
 set(_pkg "MULTICHARGE")
-set(_url "https://github.com/grimme-lab/multicharge")
+set(_url "https://github.com/dmejiar/multicharge")
 
 if(NOT DEFINED "${_pkg}_FIND_METHOD")
   if(DEFINED "${PROJECT_NAME}-dependency-method")
@@ -29,7 +29,7 @@ endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/tblite-utils.cmake")
 
-tblite_find_package("${_lib}" "${${_pkg}_FIND_METHOD}" "${_url}" "HEAD")
+tblite_find_package("${_lib}" "${${_pkg}_FIND_METHOD}" "${_url}" "updates")
 
 if(DEFINED "_${_pkg}_FIND_METHOD")
   unset("${_pkg}_FIND_METHOD")
